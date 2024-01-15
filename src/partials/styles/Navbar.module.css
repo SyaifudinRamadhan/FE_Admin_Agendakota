@@ -1,0 +1,112 @@
+.IconProfile {
+	width: 40px;
+	height: 40px;
+}
+.IconProfile img {
+	object-fit: cover;
+	width: 100%;
+	border: 1px solid #ddd;
+	aspect-ratio: 1;
+}
+.Logo {
+	width: 150px;
+}
+.Profile {
+	position: absolute;
+	gap: 5px;
+	padding: 20px;
+	border-radius: 15px;
+	box-shadow: 1px 1px 5px 2px #eaeaea;
+	right: 20px;
+	top: 77px;
+	background-color: #fff;
+	width: 150px;
+	display: flex;
+	flex-direction: column;
+}
+.ProfileItem {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+.ProfileItem svg {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.OffCanvas {
+	display: none;
+	overflow-y: auto;
+}
+.NavbarToggler {
+	box-shadow: none !important;
+}
+.ItemSideNav {
+	padding: 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	border-radius: 8px;
+}
+.ItemSideNav svg {
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 20px;
+	height: 20px;
+}
+.ItemSideNav:hover {
+	background-color: #f9f9f9;
+}
+.ItemSideNavActive {
+	background-color: #f0f0f0 !important;
+	font-weight: 600;
+}
+.OffCanvas .IconProfile {
+	width: 70px;
+	height: 70px;
+	box-shadow: 2px 2px 2px 2px #eaeaea;
+	border-radius: 50%;
+}
+.OffCanvasBody {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	overflow-y: auto;
+}
+.MainContainer {
+	display: flex;
+	flex-direction: row;
+	margin-top: 72px;
+}
+.Sidebar {
+	width: 20%;
+	overflow-y: auto;
+	max-width: 300px;
+	min-width: 250px;
+	padding: 15px;
+	padding-top: 20px;
+	background-color: #fff;
+}
+.Content {
+	padding: 20px;
+	width: 100%;
+}
+
+@media (max-width: 991.98px) {
+	.NavbarCollapse {
+		display: none !important;
+	}
+	.OffCanvas {
+		display: unset;
+	}
+	.Profile {
+		display: none !important;
+	}
+	.Sidebar {
+		display: none;
+	}
+	.MainContainer {
+		margin-top: 56.63px;
+	}
+}

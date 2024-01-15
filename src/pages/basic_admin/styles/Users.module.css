@@ -1,0 +1,17 @@
+.FormLabel {
+	font-size: 12px;
+	margin-top: -9px;
+	margin-left: 10px;
+	position: absolute;
+	background-color: white;
+}
+.PopUpAdd {
+	width: 70%;
+	max-width: unset;
+}
+
+@media (max-width: 760px) {
+	.PopUpAdd {
+		width: auto;
+	}
+}

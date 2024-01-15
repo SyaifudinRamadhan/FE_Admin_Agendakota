@@ -1,0 +1,27 @@
+@keyframes showBgOverlay {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 100%;
+	}
+}
+
+@keyframes showPopUp {
+	from {
+		translate: 0px -300px;
+	}
+	to {
+		translate: 0px 0px;
+	}
+}
+
+.PopUpLogin {
+	z-index: 9999;
+	background: #000000c4;
+	animation: showBgOverlay 300ms;
+	display: unset;
+}
+.PopUpLoginContent {
+	animation: showPopUp 300ms;
+}

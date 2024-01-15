@@ -1,38 +1,86 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.table-wrap tbody,
+.table-wrap td,
+.table-wrap tfoot,
+.table-wrap th,
+.table-wrap thead,
+.table-wrap tr {
+	overflow-wrap: anywhere;
+}
+
+.table-wrap .top-thead {
+	display: contents;
+}
+.table-wrap .top-thead-inner-1 {
+	display: none;
+}
+.table-wrap .top-thead-inner-2 {
+	display: contents;
+}
+
+.modal {
+	background: #00000073;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (max-width: 710px) {
+	.table-wrap tbody,
+	.table-wrap td,
+	.table-wrap tfoot,
+	.table-wrap th,
+	.table-wrap thead,
+	.table-wrap tr {
+		overflow-wrap: unset;
+	}
+
+	.table-wrap .top-thead {
+		display: none;
+	}
+	.table-wrap .top-thead-inner-1 {
+		display: contents;
+	}
+	.table-wrap .top-thead-inner-2 {
+		display: none;
+	}
 }

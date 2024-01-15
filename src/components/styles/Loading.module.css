@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* background Color */
+
+.Dark {
+    background: #222;
+}
+
+.White {
+    background: whitesmoke;
+}
+
+/** Background Color **/
+
+.Overflow {
+    z-index: 9998;
+}
+
+.CircleLine {
+    z-index: 9999;
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    margin: auto;
+}
+
+.CircleRed,.CircleGreen,.CircleYellow,.CircleBlue{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin: 5px;
+}
+
+.CircleRed {
+    background-color: #EA4335;
+    animation: movingUp 1s infinite linear;
+  
+}
+
+.CircleBlue {
+    background-color: #4285f4;
+    animation: movingUp 1s 0.25s infinite linear;
+   
+}
+
+.CircleGreen {
+    background-color: #34A853;
+    animation: movingUp 1s .4s infinite linear;
+    
+  
+}
+
+.CircleYellow {
+    background-color: #FBBC05;
+    animation: movingUp 1s .6s infinite linear;
+    
+}
+.Text{
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+}
+
+/* CSS ANIMATION */
+
+@keyframes movingUp {
+    0% {
+    
+        opacity: 1;
+        
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,36 @@
+.AddBtn2,
+.ContentData2 {
+	aspect-ratio: 1 !important;
+	border-radius: 8px !important;
+}
+
+.ContentData2 {
+	background-size: cover !important;
+	background-position: center;
+}
+
+.Navigator2 {
+	border-radius: 0rem 0rem 8px 8px;
+}
+
+.ContentData2:hover {
+	.Navigator2 {
+		background: linear-gradient(360deg, black, transparent);
+		/* background-color: #ca0c64; */
+	}
+	.CityName {
+		background: linear-gradient(360deg, transparent, rgba(0, 0, 0, 0.501));
+	}
+}
+
+.CityName {
+	border-radius: 8px 8px 0rem 0rem;
+	font-size: 18px;
+	font-weight: 600;
+	width: 100%;
+	height: calc(100% - 44px);
+	text-align: center;
+	display: flex;
+	color: white;
+	background: linear-gradient(360deg, transparent, rgba(0, 0, 0, 0.119));
+}

@@ -1,0 +1,53 @@
+.AddBtn {
+	/* height: 200px; */
+	background-color: #ffebf4ba;
+	border: 1px dashed #ca0c64;
+	display: flex;
+	flex-direction: column;
+	color: #ca0c64;
+	cursor: pointer;
+	aspect-ratio: 1;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
+}
+.AddBtn svg,
+.AddBtn img {
+	margin-top: auto;
+	margin-left: auto;
+	margin-right: auto;
+	width: 35px;
+	height: 35px;
+}
+.TextBtn {
+	margin-top: 10px;
+	margin-bottom: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.ContentData {
+	display: flex;
+	flex-direction: column;
+	aspect-ratio: 1;
+	margin-left: auto;
+	margin-right: auto;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.Navigator {
+	border-radius: 20px;
+	color: #000;
+}
+.ContentData:hover {
+	.Navigator {
+		background: linear-gradient(360deg, #ca0c64, transparent);
+		background: linear-gradient(
+			180deg,
+			rgb(226 83 101 / 22%),
+			transparent,
+			rgb(228 114 114 / 84%)
+		);
+		/* color: #e25365 !important; */
+	}
+}

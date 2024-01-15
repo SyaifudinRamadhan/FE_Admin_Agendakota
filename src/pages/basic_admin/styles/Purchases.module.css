@@ -1,0 +1,49 @@
+.TooglerBox {
+	background-color: #ddd !important;
+}
+
+.TooglerBox button {
+	background-color: #ddd;
+	border: 0px;
+}
+.TableDesc {
+	width: unset;
+}
+.TableDesc td {
+	padding-bottom: 10px;
+	padding-right: 20px;
+}
+.TransactionData {
+	overflow-x: auto;
+}
+.Table td {
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 0;
+	text-overflow: ellipsis;
+}
+.TableBox {
+	overflow-x: auto;
+}
+.PopUpAdd {
+	width: 90%;
+	max-width: unset;
+}
+
+@media (max-width: 992px) {
+	.TableM1000 {
+		min-width: 1000px;
+	}
+	.TableM743 {
+		min-width: 743px;
+	}
+	.TableM500 {
+		min-width: 500px;
+	}
+}
+
+@media (max-width: 760px) {
+	.PopUpAdd {
+		width: auto;
+	}
+}

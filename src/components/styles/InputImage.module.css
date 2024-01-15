@@ -1,0 +1,96 @@
+.InputImage {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+}
+.InputForm {
+	display: none;
+}
+.InputArea {
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	border: 1px dashed #ca0c64;
+	display: flex;
+	flex-direction: column;
+	color: #ca0c64;
+	text-align: center;
+	justify-content: center;
+	gap: 20px;
+	font-size: 14px;
+	background-color: #fef6f9;
+	cursor: pointer;
+}
+.InputArea:hover {
+	background-color: #fcd8e6;
+}
+.Hidden {
+	display: none !important;
+}
+.InputIcon {
+	width: 50px;
+	height: 50px;
+	margin-top: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.InputText {
+	width: 100%;
+	margin-bottom: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.InputPreview {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+/* .DeleteImage {
+	width: 50%;
+	margin: auto;
+	position: absolute;
+	height: 250px;
+	opacity: 20%;
+	display: flex;
+}
+.DeleteImage button {
+	margin: auto;
+	width: 50px !important;
+	height: 50px;
+	border-radius: 50%;
+}
+.DeleteImage button svg {
+	width: 100%;
+	height: 100%;
+}
+.DeleteImage:hover {
+	color: white !important;
+	opacity: 100%;
+} */
+.DeleteImage {
+	width: 50%;
+	margin: auto;
+	height: 250px;
+	display: flex;
+}
+.DeleteImage button {
+	margin: auto;
+}
+.DeleteImage:hover {
+	color: white !important;
+	opacity: 100%;
+}
+.PreviewImage {
+	width: 100%;
+	height: calc(100% - 49px);
+	object-fit: contain;
+	object-position: center;
+	border-radius: 8px;
+	box-shadow: 1px 1px 5px 1px #fcbad9;
+}
+.PreviewImage100 {
+	height: 100%;
+}

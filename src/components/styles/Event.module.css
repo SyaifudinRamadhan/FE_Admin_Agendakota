@@ -1,0 +1,164 @@
+.Event {
+	padding: 10px;
+	border-radius: 8px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	display: flex;
+	flex-direction: column;
+	/* flex-basis: 31.8%;
+    max-width: 31.8%; */
+	width: 31.4%;
+	max-width: 31.8%;
+	flex-grow: 1;
+	white-space: wrap;
+}
+.Cover {
+	aspect-ratio: 1.94/1;
+	height: 150px;
+	border-radius: 8px;
+	object-fit: cover;
+	cursor: pointer;
+}
+.Title {
+	font-size: 15px;
+	font-weight: 700;
+	color: #444;
+	max-height: 37px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 290px;
+	display: inline-block;
+	white-space: nowrap;
+	cursor: pointer;
+	width: 100%;
+	/* margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto; */
+}
+.Price {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	/* font-family: "Inter"; */
+}
+.Price .PriceText {
+	font-size: 12px;
+	color: #666;
+	margin-right: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.Price .PriceNumber {
+	font-size: 16px;
+	font-weight: 500;
+	color: #ca0c64;
+}
+.Organizer {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	font-size: 14px;
+	color: #666;
+	/* margin-top: 10px; */
+	padding: 10px;
+}
+.Organizer div {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.Organizer b {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.Organizer img {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	/* margin-left: auto; */
+}
+.Info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #666;
+}
+.HrSeparator {
+	width: 100%;
+	margin-top: 25px;
+}
+.Point {
+	width: 10.147px;
+	height: 10.147px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	margin-right: 3px;
+}
+.PointActive {
+	background-color: #f20063;
+	box-shadow: 0px 0px 4px 4px rgba(221, 0, 100, 0.2);
+	stroke-width: 4px;
+}
+.PointDisabled {
+	background-color: #4b4b4b;
+	box-shadow: 0px 0px 4px 4px #b3b3b3;
+	stroke-width: 4px;
+}
+.PointEnabled {
+	background-color: green;
+	box-shadow: 0px 0px 4px 4px rgb(184, 254, 184);
+	stroke-width: 4px;
+}
+.DeleteSpace {
+	margin-left: auto;
+}
+.PopupNotify {
+	display: flex;
+	text-align: center;
+	font-size: 16px;
+}
+.PopupControl {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+.ControlLeft {
+	margin-left: auto;
+}
+.ControlRight {
+	margin-right: auto;
+}
+.IconPopUp {
+	width: 100%;
+	height: 100px;
+}
+.IconPopUp svg {
+	width: 100%;
+	height: 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+hr {
+	border: 1px solid #eaeaea;
+}
+.DraftText {
+	color: #ca0c64;
+	font-weight: 600;
+}
+.DraftDesc {
+	padding-left: 5px;
+	border-left: 1px solid #000;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media (max-width: 744px) {
+	.Event {
+		flex-basis: 100%;
+		max-width: 100%;
+	}
+}

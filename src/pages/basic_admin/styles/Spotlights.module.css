@@ -1,0 +1,10 @@
+.PopUpAdd {
+	width: 70%;
+	max-width: unset;
+}
+
+@media (max-width: 760px) {
+	.PopUpAdd {
+		width: auto;
+	}
+}
