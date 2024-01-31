@@ -135,7 +135,7 @@ const Event = ({
 					<></>
 				)}
 				<img
-					src={data.logo}
+					src={process.env.REACT_APP_BACKEND_URL + data.logo}
 					alt={data.name}
 					className={styles.Cover}
 					style={

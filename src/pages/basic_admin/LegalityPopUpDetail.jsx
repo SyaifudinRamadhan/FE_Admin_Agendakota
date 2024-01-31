@@ -46,18 +46,18 @@ const LegalityPopUpDetail = ({ detailValue }) => {
 				</div>
 			</div>
 			<div className="col-12 mb-3">
-				<div className="row">
-					<div className="col-md-6">
-						<p className="fw-bold">Company Name</p>
-						<input
-							type="text"
-							placeholder="Write the company name"
-							className="form-control"
-							value={detailValue.legality_data.company_name}
-							readOnly
-						/>
-					</div>
-					{detailValue.legality_data.type_legality === "company" ? (
+				{detailValue.legality_data.type_legality === "company" ? (
+					<div className="row">
+						<div className="col-md-6">
+							<p className="fw-bold">Company Name</p>
+							<input
+								type="text"
+								placeholder="Write the company name"
+								className="form-control"
+								value={detailValue.legality_data.company_name}
+								readOnly
+							/>
+						</div>
 						<div className="col-md-6">
 							<p className="fw-bold">Bussiness Entity</p>
 							<input
@@ -68,10 +68,10 @@ const LegalityPopUpDetail = ({ detailValue }) => {
 								readOnly
 							/>
 						</div>
-					) : (
-						<></>
-					)}
-				</div>
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 			<div className="col-12 mb-3">
 				<p className="fw-bold">PIC Name</p>

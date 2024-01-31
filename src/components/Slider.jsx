@@ -22,7 +22,7 @@ const Slider = ({
 	const classNames = [styles.Content].concat(className);
 	const classsNamesNav = [styles.Navigator].concat(navigatorClasses);
 
-	const handleNext = () => {
+	const handleNext = (framePosition) => {
 		let widthFrame = mainFrameScroll.current.offsetWidth;
 		let widthSliderBox = sliderBox.current.clientWidth;
 		let valScroll = widthCard + distanceCard;
@@ -38,14 +38,14 @@ const Slider = ({
 		}
 	};
 
-	const hanldePrev = () => {
+	const hanldePrev = (framePosition) => {
 		let widthFrame = mainFrameScroll.current.offsetWidth;
 		let widthSliderBox = sliderBox.current.clientWidth;
 		let valScroll = widthCard + distanceCard;
 		if (-framePosition <= 0) {
 			setFramePosition(-(widthFrame - widthSliderBox));
 		} else {
-			if (-framePosition <= widthSliderBox) {
+			if (-framePosition - valScroll <= 0) {
 				setFramePosition(0);
 			} else {
 				setFramePosition(framePosition + valScroll);
@@ -84,13 +84,17 @@ const Slider = ({
 			<div className={classsNamesNav.join(" ")} style={navigatorStyle}>
 				<div
 					className={`${styles.ButtonNav} ${styles.ButtonNavLeft}`}
-					onClick={hanldePrev}
+					onClick={() => {
+						hanldePrev(framePosition);
+					}}
 				>
 					<BiArrowBack className={styles.IconLeft} />
 				</div>
 				<div
 					className={`${styles.ButtonNav} ${styles.ButtonNavRight}`}
-					onClick={handleNext}
+					onClick={() => {
+						handleNext(framePosition);
+					}}
 				>
 					<BiArrowBack className={styles.IconRight} />
 				</div>
