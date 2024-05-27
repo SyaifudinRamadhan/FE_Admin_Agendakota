@@ -24,6 +24,7 @@ import LoginPopUp from "./styles/LoginPopUp.module.css";
 import LoginPopUpEl from "./LoginPopUp";
 import { Alert } from "react-bootstrap";
 import Logout from "./Logout";
+import OrgType from "./basic_admin/OrgType";
 
 const PageRoutes = () => {
 	const [activeMenu, setActiveMenu] = useState("login");
@@ -122,6 +123,14 @@ const PageRoutes = () => {
 								<ActivityTopics
 									fnSetActive={setActiveMenu}
 									fnSetLoginState={setLoginState}
+								/>
+							}
+						/>
+						<Route 
+							path="/org-types"
+							element={<OrgType 
+								fnSetActive={setActiveMenu}
+								fnSetLoginState={setLoginState} 
 								/>
 							}
 						/>
