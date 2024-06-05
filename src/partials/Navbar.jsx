@@ -21,8 +21,13 @@ import {
   BiCreditCard,
   BiListUl,
   BiSelectMultiple,
+  BiError,
 } from "react-icons/bi";
 import axios from "axios";
+import LoginPopUp from "../pages/LoginPopUp";
+import LoginPopUpStyle from "../pages/styles/LoginPopUp.module.css";
+import { Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const loadDataLegality = async () => {
   try {
@@ -119,13 +124,23 @@ const loadDataWd = async () => {
   }
 };
 
-const Navbar = ({ children, active, profileIcon, navDisplay = "" }) => {
+const Navbar = ({
+  children,
+  active,
+  profileIcon,
+  setProfileIcon = () => {},
+  loginState,
+  setLoginState = () => {},
+}) => {
   const [profileMenu, setProfileMenuState] = useState(false);
   const [notifyRefund, setNotifyRefund] = useState(0);
   const [notifyWd, setNotifyWd] = useState(0);
   const [notifyLegality, setNotifyLegality] = useState(0);
+  const [errorState, setErrorState] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(false);
   const sidebar = useRef();
   const content = useRef();
+  const navigate = useNavigate();
 
   const resizeContent = () => {
     if (sidebar.current) {
@@ -163,6 +178,10 @@ const Navbar = ({ children, active, profileIcon, navDisplay = "" }) => {
     loadDataLegality().then((res) => {
       if (res.status === 200) {
         setNotifyLegality(res.data.unverified.length);
+      } else if (res.status === 401 || res.status === 403) {
+        setLoginState(0);
+      } else if (res.status !== 404) {
+        setErrorState(true);
       }
     });
 
@@ -175,6 +194,10 @@ const Navbar = ({ children, active, profileIcon, navDisplay = "" }) => {
           }
         });
         setNotifyWd(notify);
+      } else if (res.status === 401 || res.status === 403) {
+        setLoginState(0);
+      } else if (res.status !== 404) {
+        setErrorState(true);
       }
     });
 
@@ -187,15 +210,37 @@ const Navbar = ({ children, active, profileIcon, navDisplay = "" }) => {
           }
         });
         setNotifyRefund(numNotify);
+      } else if (res.status === 401 || res.status === 403) {
+        setLoginState(0);
+      } else if (res.status !== 404) {
+        setErrorState(true);
       }
     });
-  });
+    setFirstLoad(true);
+  }, [firstLoad]);
+
+  useEffect(() => {
+    if (
+      (loginState === 0 || loginState === 2) &&
+      window.location.pathname === "/"
+    ) {
+      navigate("/login");
+    }
+    console.log(loginState, firstLoad, window.location.href);
+  }, [loginState]);
 
   return (
     <>
       <nav
+        style={
+          window.location.pathname === "/login" ||
+          (window.location.pathname === "/" &&
+            (loginState === 0 || loginState === 2)) ||
+          !firstLoad
+            ? { display: "none" }
+            : { top: 0, zIndex: 5 }
+        }
         className="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100"
-        style={{ top: 0, zIndex: 5, display: navDisplay }}
       >
         <div className="container-fluid ps-4 pe-4">
           <a className="navbar-brand fs-6" href="#">
@@ -566,8 +611,15 @@ const Navbar = ({ children, active, profileIcon, navDisplay = "" }) => {
         </div>
       </nav>
       <div
+        style={
+          window.location.pathname === "/login" ||
+          (window.location.pathname === "/" &&
+            (loginState === 0 || loginState === 2)) ||
+          !firstLoad
+            ? { display: "none" }
+            : {}
+        }
         className={`${styles.MainContainer}`}
-        style={{ display: navDisplay }}
       >
         <div ref={sidebar} className={`${styles.Sidebar}`}>
           <div className={`${styles.ItemSideNav} p-0 bg-white mt-2 mb-2`}>
@@ -807,7 +859,47 @@ const Navbar = ({ children, active, profileIcon, navDisplay = "" }) => {
           </a>
         </div>
         <div ref={content} className={`${styles.Content}`}>
-          {children}
+          {(loginState === 0 || loginState === 2) &&
+          window.location.pathname !== "/login" &&
+          window.location.pathname !== "/" ? (
+            <div
+              className={`modal ${LoginPopUpStyle.PopUpLogin}`}
+              aria-hidden="true"
+              aria-labelledby="exampleModalToggleLabel"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+            >
+              <div
+                className={`modal-dialog modal-dialog-centered ${LoginPopUp.PopUpLoginContent}`}
+              >
+                <div className="modal-content">
+                  <div className="pt-3 ps-3 pe-3">
+                    <Alert variant="info">
+                      Login session has ended. Please login again for continue
+                      your activity
+                    </Alert>
+                  </div>
+                  <LoginPopUp
+                    fnSetLoginState={setLoginState}
+                    fnSetUserData={setProfileIcon}
+                    loginState={loginState}
+                  />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+          {errorState ? (
+            <div className={styles.ErrorPage}>
+              <div>
+                <BiError />
+                <h5>Terjadi Kesalahan ! Silahkan Muat Ulang Halaman !</h5>
+              </div>
+            </div>
+          ) : (
+            <div style={loginState ? {} : { display: "none" }}>{children}</div>
+          )}
         </div>
       </div>
     </>

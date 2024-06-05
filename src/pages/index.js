@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import Dashboard from "./basic_admin/Dashboard";
@@ -40,7 +40,7 @@ const PageRoutes = () => {
 				<Route
 					path="/login"
 					element={
-						<Login fnSetUserData={setProfileIcon} fnSetActive={setActiveMenu} />
+						<Login fnSetUserData={setProfileIcon} fnSetActive={setActiveMenu} fnSetLoginState={setLoginState} />
 					}
 				/>
 			</Routes>
@@ -51,45 +51,12 @@ const PageRoutes = () => {
 						? "/icons/profile-user.png"
 						: process.env.REACT_APP_BACKEND_URL + profileIcon.photo
 				}
+				setProfileIcon={setProfileIcon}
 				navDisplay={`${activeMenu === "login" ? "none" : ""}`}
+				loginState={loggedOn}
+				setLoginState={setLoginState}
 			>
-				{console.log(loggedOn === 0, profileIcon)}
-				{loggedOn === 0 || loggedOn === 2 ? (
-					<div
-						className={`modal ${LoginPopUp.PopUpLogin}`}
-						aria-hidden="true"
-						aria-labelledby="exampleModalToggleLabel"
-						data-bs-backdrop="static"
-						data-bs-keyboard="false"
-					>
-						<div
-							className={`modal-dialog modal-dialog-centered ${LoginPopUp.PopUpLoginContent}`}
-						>
-							<div className="modal-content">
-								<div className="pt-3 ps-3 pe-3">
-									<Alert variant="info">
-										Login session has ended. Please login again for continue
-										your activity
-									</Alert>
-								</div>
-								<LoginPopUpEl
-									fnSetLoginState={setLoginState}
-									fnSetUserData={setProfileIcon}
-									loginState={loggedOn}
-								/>
-							</div>
-						</div>
-					</div>
-				) : (
-					<></>
-				)}
-				<div className={`${loggedOn === 0 || loggedOn === 2 ? "d-none" : ""}`}>
-					{/* <Middleware
-						fnSetUserData={setProfileIcon}
-						fnSetLoginState={setLoginState}
-						menu={activeMenu}
-					> */}
-					<Routes>
+				<Routes>
 						<Route
 							path="/"
 							element={
@@ -248,13 +215,12 @@ const PageRoutes = () => {
 								<Events
 									fnSetActive={setActiveMenu}
 									fnSetLoginState={setLoginState}
+									loginState={loggedOn}
 								/>
 							}
 						/>
 						<Route path="/logout" element={<Logout />} />
 					</Routes>
-					{/* </Middleware> */}
-				</div>
 			</Navbar>
 		</BrowserRouter>
 	);

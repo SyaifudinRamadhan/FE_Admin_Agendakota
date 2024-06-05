@@ -77,7 +77,10 @@
 .MainContainer {
 	display: flex;
 	flex-direction: row;
-	margin-top: 72px;
+	/* margin-top: 72px; */
+	top: 72px;
+	position: absolute;
+	width: 100%;
 }
 .Sidebar {
 	width: 20%;
@@ -91,6 +94,22 @@
 .Content {
 	padding: 20px;
 	width: 100%;
+}
+.ErrorPage{
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+.ErrorPage div{
+	margin: auto;
+	gap: 10px;
+	display: flex;
+	flex-direction: column;
+}
+.ErrorPage svg{
+	margin: auto;
+	font-size: 100px;
+	color: red;
 }
 
 @media (max-width: 991.98px) {

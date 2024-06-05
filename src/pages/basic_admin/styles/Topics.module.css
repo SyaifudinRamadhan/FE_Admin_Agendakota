@@ -2,6 +2,15 @@
 	width: 70%;
 	max-width: unset;
 }
+.TooglerBox {
+	background-color: #ddd !important;
+}
+
+.TooglerBox button {
+	background-color: #ddd;
+	border: 0px;
+}
+
 
 @media (max-width: 760px) {
 	.PopUpAdd {
