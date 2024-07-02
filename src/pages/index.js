@@ -25,6 +25,9 @@ import LoginPopUpEl from "./LoginPopUp";
 import { Alert } from "react-bootstrap";
 import Logout from "./Logout";
 import OrgType from "./basic_admin/OrgType";
+import CommisionSetup from "./basic_admin/CommisionSetup";
+import RefundSetup from "./basic_admin/RefundSetup";
+import RefundCancelMng from "./basic_admin/RefundCancelMng";
 
 const PageRoutes = () => {
 	const [activeMenu, setActiveMenu] = useState("login");
@@ -219,6 +222,30 @@ const PageRoutes = () => {
 								/>
 							}
 						/>
+						<Route
+							path="/commision-setup"
+							element={
+								<CommisionSetup fnSetActive={setActiveMenu}
+								fnSetLoginState={setLoginState}
+								loginState={loggedOn} />
+							}
+						/>
+						<Route
+							path="/refund-setup"
+							element={
+								<RefundSetup fnSetActive={setActiveMenu}
+								fnSetLoginState={setLoginState}
+								loginState={loggedOn} />
+							}
+						 />
+						 <Route
+							path="/refund-cancel-manager"
+							element={
+								<RefundCancelMng fnSetActive={setActiveMenu}
+								fnSetLoginState={setLoginState}
+								loginState={loggedOn} />
+							}
+						 />
 						<Route path="/logout" element={<Logout />} />
 					</Routes>
 			</Navbar>

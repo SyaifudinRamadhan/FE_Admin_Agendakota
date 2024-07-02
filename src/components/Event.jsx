@@ -89,7 +89,7 @@ const Event = ({
   }, [startDate, nowDate]);
 
   useEffect(() => {
-    if (!noPrice && price == -1 && data.tickets.length > 0) {
+    if (!noPrice && price == -1 && data.tickets && data.tickets.length > 0) {
       let lowerPrice = parseInt(
         data.tickets[0].type_price === 3 ? 10000 : data.tickets[0].price
       );
@@ -203,7 +203,7 @@ const Event = ({
             </div>
           </div>
           <div className={styles.Info}>
-            {data.available_days.length > 0 ? (
+            {data.available_days && data.available_days.length > 0 ? (
               <>
                 {moment(startDate).format("ddd") ==
                   new Date().toLocaleDateString("en-US", {

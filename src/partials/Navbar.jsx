@@ -22,6 +22,7 @@ import {
   BiListUl,
   BiSelectMultiple,
   BiError,
+  BiAlbum,
 } from "react-icons/bi";
 import axios from "axios";
 import LoginPopUp from "../pages/LoginPopUp";
@@ -468,6 +469,19 @@ const Navbar = ({
                   Selected Activities
                 </div>
               </a>
+              <a
+                href="/commision-setup"
+                className="text-decoration-none text-black"
+              >
+                <div
+                  className={`${styles.ItemSideNav} ${
+                    active === "commision-setup" ? styles.ItemSideNavActive : ""
+                  }`}
+                >
+                  <BiSelection />
+                  Commision Setup
+                </div>
+              </a>
               <hr />
               <div className={`${styles.ItemSideNav} p-0 bg-white mt-4 mb-2`}>
                 <div className={`fs-6 text-secondary`}>Manage User</div>
@@ -500,6 +514,34 @@ const Navbar = ({
                 >
                   <BiCart />
                   Purchases
+                </div>
+              </a>
+              <a
+                href="/refund-setup"
+                className="text-decoration-none text-black"
+              >
+                <div
+                  className={`${styles.ItemSideNav} ${
+                    active === "refund-setup" ? styles.ItemSideNavActive : ""
+                  } position-relative`}
+                >
+                  <BiAlbum />
+                  Refund Setup
+                </div>
+              </a>
+              <a
+                href="/refund-cancel-manager"
+                className="text-decoration-none text-black"
+              >
+                <div
+                  className={`${styles.ItemSideNav} ${
+                    active === "refund-cancel-manager"
+                      ? styles.ItemSideNavActive
+                      : ""
+                  } position-relative`}
+                >
+                  <BiError />
+                  Refund & Cancel
                   {notifyRefund > 0 ? (
                     <span class="badge ms-2 bg-danger">
                       {notifyRefund}
@@ -741,6 +783,19 @@ const Navbar = ({
               Selected Activities
             </div>
           </a>
+          <a
+            href="/commision-setup"
+            className="text-decoration-none text-black"
+          >
+            <div
+              className={`${styles.ItemSideNav} ${
+                active === "commision-setup" ? styles.ItemSideNavActive : ""
+              }`}
+            >
+              <BiSelection />
+              Commision Setup
+            </div>
+          </a>
           <hr />
           <div className={`${styles.ItemSideNav} p-0 bg-white mt-4 mb-2`}>
             <div className={`fs-6 text-secondary`}>Manage User</div>
@@ -773,6 +828,31 @@ const Navbar = ({
             >
               <BiCart />
               Purchases
+            </div>
+          </a>
+          <a href="/refund-setup" className="text-decoration-none text-black">
+            <div
+              className={`${styles.ItemSideNav} ${
+                active === "refund-setup" ? styles.ItemSideNavActive : ""
+              } position-relative`}
+            >
+              <BiAlbum />
+              Refund Setup
+            </div>
+          </a>
+          <a
+            href="/refund-cancel-manager"
+            className="text-decoration-none text-black"
+          >
+            <div
+              className={`${styles.ItemSideNav} ${
+                active === "refund-cancel-manager"
+                  ? styles.ItemSideNavActive
+                  : ""
+              } position-relative`}
+            >
+              <BiError />
+              Refund & Cancel
               {notifyRefund > 0 ? (
                 <span class="badge ms-2 bg-danger">
                   {notifyRefund}
