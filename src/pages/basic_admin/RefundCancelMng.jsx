@@ -25,13 +25,14 @@ const handleError = (error) => {
   }
 };
 
-const considerationRefund = async ({ trxId, approved }) => {
+const considerationRefund = async ({ trxId, approved, manualOp = 0 }) => {
   try {
     let res = await axios.post(
       process.env.REACT_APP_BACKEND_URL + "/api/admin/refund/change-state",
       {
         pay_id: trxId,
         approved: approved,
+        set_finish: manualOp,
       },
       {
         headers: {
@@ -278,6 +279,7 @@ const ViewDetail = ({
                 <th scope="col">From TRX ID</th>
                 <th scope="col">Count Refund</th>
                 <th scope="col">Total Nominal</th>
+                <th scope="col">Transfer Mode</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -297,6 +299,17 @@ const ViewDetail = ({
                       )}
                       ,-
                     </td>
+                    <td>
+                      <span
+                        class={`badge text-bg-${
+                          dataRf[0].refund_data.mode === "auto"
+                            ? "success"
+                            : "warning"
+                        }`}
+                      >
+                        {dataRf[0].refund_data.mode}
+                      </span>
+                    </td>
                     {dataRf.reduce(
                       (current, acc) =>
                         current && acc.refund_data.approve_admin === 1,
@@ -307,6 +320,31 @@ const ViewDetail = ({
                       </td>
                     ) : (
                       <td className="gap-3">
+                        <button
+                          className="btn btn-outline-primary me-2 mt-2"
+                          disabled={dataRf.reduce(
+                            (current, acc) =>
+                              current && acc.refund_data.approve_admin === 1,
+                            true
+                          )}
+                          onClick={() => {
+                            let disallow = dataRf.reduce(
+                              (current, acc) =>
+                                current && acc.refund_data.approve_admin === 1,
+                              true
+                            );
+                            if (!disallow) {
+                              fnConsiderationRefund(
+                                dataRf[0].transaction_id,
+                                data.id,
+                                true,
+                                1
+                              );
+                            }
+                          }}
+                        >
+                          SetFinish
+                        </button>
                         <button
                           className="btn btn-success me-2 mt-2"
                           disabled={dataRf.reduce(
@@ -324,7 +362,8 @@ const ViewDetail = ({
                               fnConsiderationRefund(
                                 dataRf[0].transaction_id,
                                 data.id,
-                                true
+                                true,
+                                0
                               );
                             }
                           }}
@@ -348,7 +387,8 @@ const ViewDetail = ({
                               fnConsiderationRefund(
                                 dataRf[0].transaction_id,
                                 data.id,
-                                false
+                                false,
+                                0
                               );
                             }
                           }}
@@ -364,6 +404,56 @@ const ViewDetail = ({
           </table>
         </div>
       </div>
+      {data.manual_refunds.length > 0 ? (
+        <div className={`col-12 mb-3 ${styles.GroupBox}`}>
+          <h6>Manual Refund Datas</h6>
+          <div
+            className="overflow-y-auto"
+            style={{ height: "calc(100% - 25px)" }}
+          >
+            <table className="table table-striped mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Email</th>
+                  <th scope="col">Count Refund</th>
+                  <th scope="col">Total Nominal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(
+                  data.manual_refunds.reduce((current, acc) => {
+                    if (current[acc.user.email]) {
+                      current[acc.user.email].push(acc);
+                    } else {
+                      current[acc.user.email] = [acc];
+                    }
+                    return current;
+                  }, [])
+                ).map((dataRf) => {
+                  return (
+                    <tr>
+                      <td>{dataRf[0].user.email}</td>
+                      <td>{dataRf.length}</td>
+                      <td>
+                        Rp.{" "}
+                        {numberFormat.format(
+                          dataRf.reduce((current, acc) => {
+                            // console.log(current, acc.refund_data);
+                            return current + acc.nominal;
+                          }, 0)
+                        )}
+                        ,-
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className={`col-12 mb-3 ${styles.GroupBox}`}>
         <div className="d-flex mb-2">
           <h6 className="me-2">User Success Transactions</h6>
@@ -469,9 +559,9 @@ const RefundCancelMng = ({
     });
   };
 
-  const handleConsRefund = (trxId, eventId, approved) => {
+  const handleConsRefund = (trxId, eventId, approved, manualOp) => {
     setLoading(true);
-    considerationRefund({ trxId: trxId, approved }).then((res) => {
+    considerationRefund({ trxId: trxId, approved, manualOp }).then((res) => {
       if (res.status === 202) {
         window.alert(res.data.message.join(", "));
         handleReloadPage(eventId);
@@ -479,15 +569,13 @@ const RefundCancelMng = ({
         fnSetLoginState(0);
         setPausedProcess({
           name: "consideration",
-          data: { trxId, eventId, approved },
+          data: { trxId, eventId, approved, manualOp },
           state: true,
         });
         setLoading(false);
       } else {
         window.alert(
-          res.status === 404
-            ? "Payment or refund data not found !"
-            : "Failed access server !"
+          res.status === 404 ? res.data.data.error : "Failed access server !"
         );
         setLoading(false);
       }
@@ -569,7 +657,8 @@ const RefundCancelMng = ({
         handleConsRefund(
           pausedProcess.data.trxId,
           pausedProcess.data.eventId,
-          pausedProcess.data.approved
+          pausedProcess.data.approved,
+          pausedProcess.data.manualOp
         );
       } else if (pausedProcess.name === "delete-ticket") {
         handleDelTicket(
