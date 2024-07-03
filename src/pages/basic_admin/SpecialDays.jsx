@@ -366,7 +366,7 @@ const toRightInSpotlight = async ({ spotlightEventId }) => {
   }
 };
 
-const delDataInSpotlight = async ({ spotlightEventId }) => {
+const delDataInSpotlight = async ({ spotlightId, spotlightEventId }) => {
   // output key = special_day_events
   try {
     let data = await axios.post(
@@ -382,10 +382,7 @@ const delDataInSpotlight = async ({ spotlightEventId }) => {
         },
       }
     );
-    return {
-      data: data.data,
-      status: data.status,
-    };
+    return getSpotlightData({ spotlightId: spotlightId });
   } catch (error) {
     console.log(error);
     if (error.response === undefined) {
@@ -688,37 +685,38 @@ const SpecialDays = ({
 
   const handleDelEvent = (id, evtSpotId) => {
     setLoading(true);
-    delDataInSpotlight({ spotlightEventId: evtSpotId }).then((res) => {
-      // console.log(res);
-      if (res.status === 202) {
-        let index = 0;
-        showData.forEach((data) => {
-          if (data.data.id === id) {
-            showData[index].events = res.data.special_day_events.map((evt) => {
-              evt.event.id_data = evt.id;
-              return evt.event;
-            });
+    delDataInSpotlight({ spotlightId: id, spotlightEventId: evtSpotId }).then(
+      (res) => {
+        // console.log(res);
+        if (res.status === 200) {
+          let index = 0;
+          showData.forEach((data) => {
+            console.log(res);
+            if (data.data.id === id) {
+              // console.log(showData[index], res.data.spotlight);
+              showData[index] = res.data.special_day;
+            }
+            index++;
+          });
+          setAlert({
+            state: true,
+            content: "Event in special day group has deleted",
+            type: "success",
+          });
+        } else {
+          if (res.status == 401) {
+            fnSetLoginState(0);
           }
-          index++;
-        });
-        setAlert({
-          state: true,
-          content: "Event in special day group has deleted",
-          type: "success",
-        });
-      } else {
-        if (res.status == 401) {
-          fnSetLoginState(0);
+          setAlert({
+            state: true,
+            content: Object.values(res.data.data).toString(),
+            type: "danger",
+          });
         }
-        setAlert({
-          state: true,
-          content: Object.values(res.data.data).toString(),
-          type: "danger",
-        });
+        setLoading(false);
+        resetAlert();
       }
-      setLoading(false);
-      resetAlert();
-    });
+    );
   };
 
   const handleOpenAdd = () => {
