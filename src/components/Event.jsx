@@ -134,10 +134,10 @@ const Event = ({
   const openEvent = (id, slug) => {
     if (forOrganizer) {
       localStorage.setItem("active-event", id);
-      // window.location.replace("https://agendakota-bc.my.id/event/dashboard");
-      window.open("https://agendakota-bc.my.id/event/" + id);
+      // window.location.replace("https://agendakota.id/event/dashboard");
+      window.open("https://agendakota.id/event/" + id);
     } else {
-      window.open("https://agendakota-bc.my.id/event/" + id);
+      window.open("https://agendakota.id/event/" + id);
     }
   };
 
@@ -333,9 +333,7 @@ const Event = ({
                     <div
                       className="my-auto"
                       onClick={() => {
-                        copyHandle(
-                          "https://agendakota-bc.my.id/event/" + data.id
-                        );
+                        copyHandle("https://agendakota.id/event/" + data.id);
                       }}
                     >
                       Link
