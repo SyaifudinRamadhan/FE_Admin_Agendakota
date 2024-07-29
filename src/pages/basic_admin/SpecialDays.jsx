@@ -978,7 +978,7 @@ const SpecialDays = ({
                               handleSetView(data.data.id);
                             }}
                           >
-                            Set Active
+                            {data.data.view ? "Set In-Active" : "Set Active"}
                           </button>
                           <button
                             className="btn btn-warning ms-2"
